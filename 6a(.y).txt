@@ -1,0 +1,27 @@
+%{ 
+#include<stdio.h> 
+%} 
+%token NUM ID 
+%left '+' '-' 
+%left '*' '/' 
+%% 
+e : e '+' e | 
+e '-' e | 
+e '*' e | 
+e '/' e | 
+'('e')' | 
+NUM | ID    ; 
+%% 
+main() 
+{ 
+printf(" Type the Expression & Press Enter key\n"); 
+yyparse(); 
+printf(" Valid Expression \n"); 
+} 
+yyerror() 
+{ 
+printf(" Invalid Expresion!!!!\n"); 
+exit(0); 
+}
+yywrap()
+{}

@@ -1,0 +1,27 @@
+%{ 
+#include <stdio.h>
+%}
+%token NUM 
+%left '+' '-' 
+%left '*' '/' 
+%%
+expr : e             { printf(" Valid Expression \n"); printf(" Result : %d\n",$$); return 0;}; 
+e : e '+' e             {$$=$1+$3;}| 
+e '-' e               {$$=$1-$3;} | 
+e '*' e            {$$=$1*$3;} | 
+e '/' e             {$$=$1/$3;} | 
+'('e')'                {$$=$2;} | 
+NUM                      {$$=$1;}; 
+%% 
+main() 
+{ 
+printf(" Type the Expression & Press Enter key\n"); 
+yyparse(); 
+}
+yyerror()
+{
+printf(" InValid Expression \n");
+}
+int yywrap()
+{
+}
